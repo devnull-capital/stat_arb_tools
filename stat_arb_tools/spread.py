@@ -1,4 +1,5 @@
-from .exceptions import ZeroHedgeRatioException
+from typing import List
+from .exceptions import ZeroHedgeRatioException, NilListException, MissMatchedLengthException
 
 ZeroQException = Exception("q cannot be zero")
 
@@ -58,3 +59,40 @@ def calcSpreadReturn(p: float, q: float, hedgeRatio: float) -> float:
         raise ZeroQException
 
     return ((p - hedgeRatio * q) / (hedgeRatio * q))
+
+def calcDist(zX: List[float], zY: List[float]) -> float:
+    """Calculates the sum of squared differences between two normalized price series. Normalization should be done through the z-transform.
+
+
+    Parameters
+    ----------
+    zX : list of float
+        Normalized list of asset #1
+    zY : list of float
+        Normalized list of asset #2
+
+
+    Returns
+    -------
+    float
+        Returns the sum of squared differences.
+
+
+    Raises
+    ------
+    NilListException
+        If a list of length zero is provided.
+    MissMatchedLengthException
+        If the lists are not of equal length.
+
+    """
+    if len(zX) == 0:
+        raise NilListException
+    if len(zX) != len(zY):
+        raise MissMatchedLengthException
+
+    dist = 0.0
+    for i in range(len(zX)):
+        dist += (zX[i] - zY[i]) ** 2
+
+    return dist
