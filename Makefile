@@ -24,6 +24,10 @@ install/deps:
 test:
 	@python3 setup.py test
 
+.PHONY: test/specific
+test/specific:
+	@python3 setup.py nosetests --tests stat_arb_tools/tests/adf_test.py:TestADF.test_female_births -v
+
 .PHONY: clean/dist
 clean/dist:
 	@rm ./dist/*
