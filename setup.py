@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="stat_arb_tools",
-    version="0.0.2",
+    version="0.0.3",
     author="Adam Hanna",
     author_email="ahanna@mba2016.hbs.edu",
     description="This package provides statistics arbitrage tools for traders",
