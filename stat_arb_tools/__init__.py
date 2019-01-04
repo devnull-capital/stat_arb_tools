@@ -6,3 +6,4 @@ from .spread import ZeroQException, calcSpread, calcSpreadReturn, calcDist, calc
 from .exceptions import NilListException, MissMatchedLengthException, ZeroHedgeRatioException
 from .znorm import ZeroStdDevException, zNorm
 from .stoploss import calcOptimalStopLoss, calcOptimalVarStopLoss
+from .kellycritereon import calcKellyCritereon
