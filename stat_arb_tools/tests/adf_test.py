@@ -8,7 +8,6 @@ class TestADF(unittest.TestCase):
         data = read_csv('stat_arb_tools/tests/test_data/daily-total-female-births.csv', header=0)
 
         res  = adf(delete(data.values, [0], axis=1).ravel())
-        print(res)
 
         self.assertEqual(round(-4.808291253559763, 4), round(res[0], 4))
         self.assertEqual(round(5.243412990149865e-05, 4), round(res[1], 4))
