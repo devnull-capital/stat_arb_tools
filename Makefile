@@ -1,4 +1,8 @@
-all: test clean/dist build publish
+all: test docs/source clean/dist build publish
+
+.PHONY: docs/source
+docs/source:
+	@sphinx-apidoc -f -o docs/source stat_arb_tools
 
 .PHONY: docs
 docs:

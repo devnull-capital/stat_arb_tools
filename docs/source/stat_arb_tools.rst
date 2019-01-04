@@ -28,6 +28,14 @@ stat\_arb\_tools.exceptions module
     :undoc-members:
     :show-inheritance:
 
+stat\_arb\_tools.kellycritereon module
+--------------------------------------
+
+.. automodule:: stat_arb_tools.kellycritereon
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 stat\_arb\_tools.sigma module
 -----------------------------
 
@@ -40,6 +48,14 @@ stat\_arb\_tools.spread module
 ------------------------------
 
 .. automodule:: stat_arb_tools.spread
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+stat\_arb\_tools.stoploss module
+--------------------------------
+
+.. automodule:: stat_arb_tools.stoploss
     :members:
     :undoc-members:
     :show-inheritance:
