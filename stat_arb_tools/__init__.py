@@ -5,3 +5,4 @@ from .sigma import L2ZeroValException, BetaHatLTEZeroException, calcSigmaHat, ca
 from .spread import ZeroQException, calcSpread, calcSpreadReturn, calcDist, calcNotes
 from .exceptions import NilListException, MissMatchedLengthException, ZeroHedgeRatioException
 from .znorm import ZeroStdDevException, zNorm
+from .stoploss import calcOptimalStopLoss, calcOptimalVarStopLoss
