@@ -36,14 +36,18 @@ def adf(
         Maximum lag which is included in test, default 12*(nobs/100)^{1/4}
     regression : Regression enum
         Constant and trend order to include in regression
-            'c' : constant only (default)
-            'ct' : constant and trend
-            'ctt' : constant, and linear and quadratic trend
-            'nc' : no constant, no trend
+
+        - 'c' : constant only (default)
+        - 'ct' : constant and trend
+        - 'ctt' : constant, and linear and quadratic trend
+        - 'nc' : no constant, no trend
+
     autolag : Autolag enum
-        if None, then maxlag lags are used
-        if 'AIC' (default) or ‘BIC’, then the number of lags is chosen to minimize the corresponding information criterion
-        't-stat' based choice of maxlag. Starts with maxlag and drops a lag until the t-statistic on the last lag length is significant using a 5%-sized test
+
+        - if None, then maxlag lags are used
+        - if 'AIC' (default) or ‘BIC’, then the number of lags is chosen to minimize the corresponding information criterion
+        - 't-stat' based choice of maxlag. Starts with maxlag and drops a lag until the t-statistic on the last lag length is significant using a 5%-sized test
+
     store : bool
         If True, then a result instance is returned additionally to the adf 
     regresults : bool
@@ -51,8 +55,15 @@ def adf(
 
     Returns
     -------
-    tuple of float
-        Returns the statistic and pVal
+    tuple of various values
+
+        - adf (float) – Test statistic
+        - pvalue (float) – MacKinnon’s approximate p-value based on MacKinnon (1994, 2010)
+        - usedlag (int) – Number of lags used
+        - nobs (int) – Number of observations used for the ADF regression and calculation of the critical values
+        - critical values (dict) – Critical values for the test statistic at the 1 %, 5 %, and 10 % levels. Based on MacKinnon (2010)
+        - icbest (float) – The maximized information criterion if autolag is not None.
+        - resstore (ResultStore, optional) – A dummy class with results attached as attributes
 
 
     Raises
@@ -84,12 +95,38 @@ def isStationary(
         Time series of prices of asset #1.
     l2 : list of float
         Time series of prices of asset #2.
+    maxlag : int
+        Maximum lag which is included in test, default 12*(nobs/100)^{1/4}
+    regression : Regression enum
+        Constant and trend order to include in regression
 
+        - 'c' : constant only (default)
+        - 'ct' : constant and trend
+        - 'ctt' : constant, and linear and quadratic trend
+        - 'nc' : no constant, no trend
+
+    autolag : Autolag enum
+
+        - if None, then maxlag lags are used
+        - if 'AIC' (default) or ‘BIC’, then the number of lags is chosen to minimize the corresponding information criterion
+        - 't-stat' based choice of maxlag. Starts with maxlag and drops a lag until the t-statistic on the last lag length is significant using a 5%-sized test
+
+    store : bool
+        If True, then a result instance is returned additionally to the adf 
+    regresults : bool
+        If True, the full regression results are returned. 
 
     Returns
     -------
-    tuple of float
-        Returns the statistic and pVal
+    tuple of various values
+
+        - adf (float) – Test statistic
+        - pvalue (float) – MacKinnon’s approximate p-value based on MacKinnon (1994, 2010)
+        - usedlag (int) – Number of lags used
+        - nobs (int) – Number of observations used for the ADF regression and calculation of the critical values
+        - critical values (dict) – Critical values for the test statistic at the 1 %, 5 %, and 10 % levels. Based on MacKinnon (2010)
+        - icbest (float) – The maximized information criterion if autolag is not None.
+        - resstore (ResultStore, optional) – A dummy class with results attached as attributes
 
 
     Raises

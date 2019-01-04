@@ -1,5 +1,13 @@
 all: test clean/dist build publish
 
+.PHONY: docs
+docs:
+	@make -C docs html
+
+.PHONY: run/docs
+run/docs:
+	@(cd docs/build/html && python -m SimpleHTTPServer)
+
 .PHONY: requirements
 requirements:
 	@pip-compile --generate-hashes --output-file requirements.txt setup.py
