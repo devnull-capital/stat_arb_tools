@@ -1,5 +1,7 @@
 from typing import List
+from math import log
 from .exceptions import ZeroHedgeRatioException, NilListException, MissMatchedLengthException
+from .beta import calcBetaHat
 
 ZeroQException = Exception("q cannot be zero")
 
@@ -96,3 +98,43 @@ def calcDist(zX: List[float], zY: List[float]) -> float:
         dist += (zX[i] - zY[i]) ** 2
 
     return dist
+
+def calcNotes(l1: List[float], l2: List[float]) -> List[float]:
+    """At time t, the log price difference (spread) is a random variable ut plus a constant ln(𝛽). This function calculates those random variables, ut.
+
+
+    Parameters
+    ----------
+    l1 : list of float
+        Time series of prices of asset #1.
+    l2 : list of float
+        Time series of prices of asset #2.
+
+
+
+    Returns
+    -------
+    list of float
+
+
+
+    Raises
+    ------
+    NilListException
+        If a list of length zero is provided.
+    MissMatchedLengthException
+        If the lists are not of equal length.
+
+    """
+    if len(l1) == 0:
+        raise NilListException
+    if len(l1) != len(l2):
+        raise MissMatchedLengthException
+
+    betaHat = calcBetaHat(l1, l2)
+
+    ut = []
+    for i in range(len(l1)):
+        ut.append(log(l1[i]) - log(l2[i]) - log(betaHat))
+
+    return ut
