@@ -1,4 +1,8 @@
-all: test clean/dist build publish
+all: test docs/source clean/dist build publish
+
+.PHONY: docs/source
+docs/source:
+	@sphinx-apidoc -f -o docs/source stat_arb_tools
 
 .PHONY: docs
 docs:
@@ -19,6 +23,10 @@ install/deps:
 .PHONY: test
 test:
 	@python3 setup.py test
+
+.PHONY: test/specific
+test/specific:
+	@python3 setup.py nosetests --tests stat_arb_tools/tests/adf_test.py:TestADF.test_female_births -v
 
 .PHONY: clean/dist
 clean/dist:
