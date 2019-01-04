@@ -1,7 +1,7 @@
 import unittest
 from pandas import read_csv
 from numpy import delete
-from stat_arb_tools import calcSpread, calcSpreadReturn, calcDist
+from stat_arb_tools import calcSpread, calcSpreadReturn, calcDist, calcNotes
 from stat_arb_tools import zNorm
 
 class TestCalcSpread(unittest.TestCase):
@@ -35,6 +35,15 @@ class TestCalcDist(unittest.TestCase):
         zGoogList = zNorm(googList)
 
         self.assertEqual(round(757.9458835107689, 4), round(calcDist(zAppleList, zGoogList), 4))
+
+class TestCalcWhiteNotes(unittest.TestCase):
+    def test_female_births(self):
+        data = read_csv('stat_arb_tools/tests/test_data/daily-total-female-births.csv', header=0)
+        arr = delete(data.values, [0], axis=1).ravel()
+        res = calcNotes(arr, arr)
+
+        for i in range(len(res)):
+            self.assertEqual(0.0, res[i])
 
 if __name__ == '__main__':
     unittest.main()

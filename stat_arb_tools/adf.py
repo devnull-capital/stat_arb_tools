@@ -4,6 +4,7 @@ from typing import List, Tuple, Optional
 from statsmodels.tsa.stattools import adfuller, ResultsStore
 from .beta import calcBetaHat
 from .exceptions import NilListException, MissMatchedLengthException
+from .spread import calcNotes
 
 class Regression(Enum):
     c = "constant"
@@ -142,10 +143,6 @@ def isStationary(
     if len(l1) != len(l2):
         raise MissMatchedLengthException
 
-    betaHat = calcBetaHat(l1, l2)
-
-    ut = []
-    for i in range(len(l1)):
-        ut.append(log(l1[i]) - log(l2[i]) - log(betaHat))
+    ut = calcNotes(l1, l2)
 
     return adf(ut, maxlag = maxlag, regression = regression, autolag = autolag, store = store, regresults = regresults)
